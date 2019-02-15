@@ -75,7 +75,6 @@ class CDynamicDomain
             {
                 "DomainName": this.m_szDomain
             };
-            console.log( 'DescribeDomainRecords' );
             this.m_pClient.request( 'DescribeDomainRecords', params, requestOption ).then( (result) => {
                 var aryRecord = result.DomainRecords.Record;
                 this.m_aryDomainRecords = aryRecord;
@@ -90,7 +89,7 @@ class CDynamicDomain
                     break;
                 }
                 this.DelayCheck();
-            }, MessageError );
+            }, CDynamicDomain.MessageError );
         }
         else if( this.m_nRecordID == 0 )
         {
@@ -100,12 +99,11 @@ class CDynamicDomain
                 "Type": this.m_szType,
                 "Value": this.m_szNextValue
             };
-            console.log( 'AddDomainRecord' );
             this.m_pClient.request( 'AddDomainRecord', params, requestOption ).then( (result) => {
                 this.m_nRecordID = result.RecordId;
                 this.m_szPrevValue = this.m_szNextValue;
                 this.DelayCheck();
-            }, MessageError );
+            }, CDynamicDomain.MessageError );
         }
         else if( this.m_szPrevValue == this.m_szNextValue )
         {
@@ -120,12 +118,11 @@ class CDynamicDomain
                 "Type": this.m_szType,
                 "Value": this.m_szNextValue
             };
-            console.log( 'UpdateDomainRecord' );
             this.m_pClient.request( 'UpdateDomainRecord', params, requestOption ).then( (result) => {
                 this.m_szPrevValue = this.m_szNextValue;
                 this.m_szNextValue = null;
                 this.DelayCheck();
-            }, MessageError );
+            }, CDynamicDomain.MessageError );
         }
     }
 
@@ -136,3 +133,5 @@ class CDynamicDomain
         }, this.m_nInterval );
     }
 };
+
+module.exports = CDynamicDomain;
