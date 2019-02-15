@@ -1,18 +1,15 @@
-var CDynamicDomain = (function()
+'use strict';
+
+const Core = require('@alicloud/pop-core');
+const https = require('https');
+
+const requestOption = {
+    method: 'POST'
+};
+
+class CDynamicDomain
 {
-    const Core = require('@alicloud/pop-core');
-    var requestOption = {
-        method: 'POST'
-    };
-
-    function MessageError( ex )
-    {
-        console.error( "error....................." );
-        console.error( ex );
-        console.error( "error....................." );
-    }
-
-    function CDynamicDomain( szAccessKeyID, szAccessKeySecret,
+    constructor( szAccessKeyID, szAccessKeySecret,
         szDomain, szRR, szType, funcGetValue, nInterval )
     {
         this.m_funcGetValue = funcGetValue;
@@ -34,12 +31,16 @@ var CDynamicDomain = (function()
 
         this.DelayCheck();
     }
-
-    var __proto = CDynamicDomain.prototype;
     
-    CDynamicDomain.GetWorldIP = function( funcCallback )
+    static MessageError( ex )
     {
-        var https = require('https');
+        console.error( "error....................." );
+        console.error( ex );
+        console.error( "error....................." );
+    }
+    
+    static GetWorldIP( funcCallback )
+    {
         https.get( 'https://www.taobao.com/help/getip.php', ( res ) => {
             res.on( 'data', ( d ) => {
                 var data = '';
@@ -57,7 +58,7 @@ var CDynamicDomain = (function()
         } );
     }
 
-    __proto.Check = function()
+    Check()
     {
         console.log( 'Check', this.m_nRecordID, this.m_szPrevValue, this.m_szNextValue );
 
@@ -128,12 +129,10 @@ var CDynamicDomain = (function()
         }
     }
 
-    __proto.DelayCheck = function()
+    DelayCheck()
     {
         setTimeout( ()=>{
             this.Check();
         }, this.m_nInterval );
     }
-
-    return CDynamicDomain;
-})();
+};
