@@ -10,9 +10,12 @@ const requestOption = {
 class CDynamicDomain
 {
     constructor( szAccessKeyID, szAccessKeySecret,
-        szDomain, szRR, szType, funcGetValue, nInterval )
+        szDomain, szRR, szType, nInterval, funcGetValue )
     {
-        this.m_funcGetValue = funcGetValue;
+        this.m_funcGetValue = funcGetValue || function( funcCallback )
+        {
+            CDynamicDomain.GetWorldIP( funcCallback );
+        };
         this.m_nInterval = nInterval;
         this.m_szDomain = szDomain;
         this.m_szType = szType;
