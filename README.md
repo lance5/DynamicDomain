@@ -3,9 +3,9 @@
 
 准备环境
 #
-1、安装nodejs
-2、git clone 项目
-3、导入aliapi的nodejs库（需要在DynamicDomain目录下执行）
+1、安装nodejs<br>
+2、git clone 项目<br>
+3、导入aliapi的nodejs库（需要在DynamicDomain目录下执行）<br>
 ```shell
 npm install @alicloud/pop-core --save
 ```
@@ -30,14 +30,14 @@ node order.js
 
 方式2（使用脚本）：
 ##
-1、拷贝文件index.js到new.js
-2、将如下值按照真实值修订
-  szAccessKeyID 阿里云access key
-  szAccessKeySecret 阿里云access secret
-  szDomain  域名
-  szRR  主机记录
-  szType  记录类型
-  nInterval 网络调用频率
+1、拷贝文件index.js到new.js<br>
+2、将如下值按照真实值修订<br>
+  szAccessKeyID 阿里云access key<br>
+  szAccessKeySecret 阿里云access secret<br>
+  szDomain  域名<br>
+  szRR  主机记录<br>
+  szType  记录类型<br>
+  nInterval 网络调用频率<br>
 3、执行脚本
 ```shell
 node new.js
